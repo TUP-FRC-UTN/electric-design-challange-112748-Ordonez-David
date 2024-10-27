@@ -2,3 +2,35 @@
 https://getbootstrap.com/docs/5.3/forms/form-control/#example
 https://getbootstrap.com/docs/5.3/forms/select/#default
 https://getbootstrap.com/docs/5.3/forms/select/#default -->
+
+<form [formGroup]="presupuestoForm" (ngSubmit)="onSubmit()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre" type="text" />
+  
+    <label for="fecha">Fecha:</label>
+    <input id="fecha" formControlName="fecha" type="date" />
+  
+    <div formArrayName="modulos">
+      <div *ngFor="let modulo of modulos.controls; let i = index" [formGroupName]="i">
+        <h3>Módulo {{ i + 1 }}</h3>
+        
+        <label for="tipoModulo">Tipo de Módulo:</label>
+        <input id="tipoModulo" formControlName="tipoModulo" type="text" />
+        
+        <label for="ambiente">Ambiente:</label>
+        <input id="ambiente" formControlName="ambiente" type="text" />
+        
+        <label for="precio">Precio:</label>
+        <input id="precio" formControlName="precio" type="number" />
+  
+        <label for="lugar">Lugar:</label>
+        <input id="lugar" formControlName="lugar" type="text" />
+  
+        <button type="button" (click)="removeModulo(i)">Eliminar Módulo</button>
+      </div>
+    </div>
+  
+    <button type="button" (click)="addModulo()">Agregar Módulo</button>
+    <button type="submit">Guardar Presupuesto</button>
+  </form>
+  
